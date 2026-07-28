@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mini Firewall Manager</title>
+
+    <style>
+
+        body{
+            background:#111;
+            color:white;
+            font-family:Arial;
+            width:900px;
+            margin:auto;
+        }
+
+        input{
+            padding:8px;
+            width:250px;
+        }
+
+        button{
+            padding:8px 15px;
+            margin:5px;
+        }
+
+        pre{
+            background:#222;
+            padding:15px;
+            overflow:auto;
+            border-radius:8px;
+        }
+
+        .green{
+            background:#28a745;
+            color:white;
+        }
+
+        .red{
+            background:#dc3545;
+            color:white;
+        }
+
+        .blue{
+            background:#007bff;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🔥 Mini Firewall Manager</h1>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for m in messages %}
+<p>{{m}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<hr>
+
+<h3>Allow IP</h3>
+
+<form action="/allow" method="post">
+
+<input
+name="ip"
+placeholder="192.168.1.10 or 192.168.1.0/24">
+
+<button class="green">
+Allow
+</button>
+
+</form>
+
+<hr>
+
+<h3>Block IP</h3>
+
+<form action="/block" method="post">
+
+<input
+name="ip"
+placeholder="8.8.8.8">
+
+<button class="red">
+Block
+</button>
+
+</form>
+
+<hr>
+
+<h3>Delete Rule</h3>
+
+<form action="/delete" method="post">
+
+<input
+name="rule"
+placeholder="Rule Number">
+
+<button class="blue">
+Delete
+</button>
+
+</form>
+
+<hr>
+
+<form action="/flush" method="post">
+
+<button class="red">
+Flush INPUT Rules
+</button>
+
+</form>
+
+<hr>
+
+<h2>Current Firewall Rules</h2>
+
+<pre>{{rules}}</pre>
+
+</body>
+
+</html>
